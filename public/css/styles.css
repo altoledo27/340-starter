@@ -2,5 +2,203 @@
 *,
 *:before,
 *:after {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+}
+body {
+  background-image: url("/images/site/small_check.jpg");
+  background-size: cover;        
+  background-position: center;   
+  background-repeat: no-repeat; 
+}
+#wrapper{
+  margin: 1rem auto;
+  padding: 0 0.5rem;
+  width: 70%;
+  background-color: white;
+  border: 5px solid #0ab4d6;
+  border-radius: 1%;
+}
+h1, h2, h3, h4, h5, h6{
+  font-family: "Roboto Slab", serif;
+  font-weight: 600;
+}
+p, a, li{
+  font-family: "Zalando Sans", sans-serif;
+  font-weight: 400;
+}
+a, a:visited{
+  color:black;
+  text-decoration: none;
+}
+#top-header{
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.siteName a{
+  font-weight: 500;
+  font-size: 2rem;
+}
+#tools a{
+  font-variant:small-caps;
+}
+
+ul{
+  background-color: black;
+  padding: 0.5rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+li{
+  color: white;
+ list-style: none;
+}
+main{
+  margin: 2rem 0
+}
+#car-container{
+  position: relative;
+  overflow: hidden;
+  margin: 1.5rem auto;
+}
+#car-container img {
+    margin: 1.5rem auto;
+    display: block;
+    width: 650px; 
+    height: auto;
+}
+#info-container{
+  color:#0ab4d6;
+  position: absolute;
+  background-color: rgba(250, 250, 250, 0.8);
+  width: 20%;
+  top: 70px;
+  left: 60px;
+  bottom:0;
+  display: flex;
+  flex-direction: column;
+}
+#info-container p{
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 0.2rem 0;
+}
+#info-button{
+  margin: 40px 0;
+}
+
+#info-button a{
+  padding: 0.9rem 2rem;
+  color: black;
+  font-weight: 800;
+  display: inline-block;
+  background-color: #0ab4d6;
+  border: 1px solid rgba(255, 255, 255, 0.767);
+  box-shadow: 2px 2px 2px rgba(17, 17, 17, 0.527);
+}
+#car-features{
+  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  gap:20px;
+}
+.car-upgrades{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+#car-features h2{
+  margin-bottom: 2rem;
+}
+.upgrade-element{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.upgrade-img{
+  background-color: #0ab4d6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  width: 100%;
+  font-size: 0.7rem;
+  border: 1px solid #333;
+}
+.upgrade-element a {
+  text-decoration: underline;
+  font-size: 0.9rem;
+  color: blue;
+}
+#car-reviews{
+  margin-left: 1rem;
+}
+#car-reviews ul{
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+}
+#car-reviews li{
+  list-style: disc;
+  margin-bottom: 20px;
+  color: black;
+}
+footer{
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+}
+
+/****Mobile*****/
+
+@media (max-width: 600px){
+  body {
+  background-image:none;
+  }
+  #wrapper{
+    width: 100%;
+    border: none;
+  }
+  ul{
+    padding: 1rem 0;
+  }
+  #car-container{
+  margin: 1.5rem auto;
+  padding: 1rem 0;
+  position: relative;
+  overflow: hidden;
+  }
+  #car-container img{
+    max-width: 350px;
+  }
+  #info-container{
+    width: 45%;
+    height: 80%;
+    top: 40px;
+    left: 0;
+    bottom: 0;
+  }
+  #info-container h2{
+    font-weight: 800;
+  }
+  #info-button{
+    margin:0;
+  }
+  #info-container p{
+    font-size: 1rem;
+    margin: 0;
+  }
+  #info-button a{
+    padding: 0.7rem 1rem;
+    margin-top: 5px;
+  }
+  #car-features{
+    display: flex;
+    flex-direction: column-reverse;
+  }
 }
