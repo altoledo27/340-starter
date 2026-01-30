@@ -47,7 +47,7 @@ a, a:visited{
 }
 
 ul{
-  background-color: black;
+  background-color: white;
   padding: 0.5rem 0;
   display: flex;
   flex-direction: row;
@@ -74,7 +74,7 @@ main{
 #info-container{
   color:#0ab4d6;
   position: absolute;
-  background-color: rgba(250, 250, 250, 0.8);
+  background-color: rgba(241, 241, 241, 0.527);
   width: 20%;
   top: 70px;
   left: 60px;
@@ -105,6 +105,7 @@ main{
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-content: center;
+  align-content: space-between;
   gap:20px;
 }
 .car-upgrades{
