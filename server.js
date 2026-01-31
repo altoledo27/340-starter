@@ -12,6 +12,7 @@ const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
+const utilities = require("./utilities/")
 
 /* ***********************
  * View Engine and Templates
@@ -24,6 +25,41 @@ app.set("layout", "./layouts/layout") //not at view root
  * Routes
  *************************/
 app.use(static)
+
+//Index route
+app.get("/", utilities.handleErrors(baseController.buildHome))
+app.use("/inv", inventoryRoute)
+//File Not Found Route - must be last route in list
+
+app.use(async (req, res, next) =>{
+  next({status: 404, message: 'Sorry, we appear to have lost that page. '})
+})
+
+/* ***********************
+* Express Error Handler
+* Place after all other middleware
+*************************/
+
+app.use(async (err, req, res, next) => {
+  let nav = await utilities.getNav()
+  console.error(`Error at: "${req.originalUrl}": ${err.message}`)
+  
+  let message;
+  let title = err.status || 500;
+
+  if (err.status == 404) {
+    message = err.message
+  } else {
+    title = 'Server Error'; 
+    message = 'System Crash! Our hamsters are tired'
+  }
+
+  res.render("errors/error", {
+    title: title === 500 ? "Server Error" : title, 
+    message,
+    nav
+  })
+})
 
 /* ***********************
  * Local Server Information
@@ -39,6 +75,4 @@ app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
 
-//Index route
-app.get("/", baseController.buildHome)
-app.use("/inv", inventoryRoute)
+

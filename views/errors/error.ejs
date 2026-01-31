@@ -1,0 +1,16 @@
+<%#Assigment 3 Haddle Error %>
+<% if (title){ %>
+<h1><%= title %></h1>
+<div id="error-img">
+    <picture>
+        <source media="(min-width: 700px)" srcset="/images/site/hamster_error.png">
+        <img src="/images/site/hamster_error_small.png" alt="404 Error Image">
+    </picture>
+</div>
+
+<% }else{
+    res.redirect('/')
+} %>
+<div class="error-message-text">
+    <h3><%- message %></h3>
+</div>

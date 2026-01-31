@@ -46,16 +46,22 @@ a, a:visited{
   font-variant:small-caps;
 }
 
-ul{
-  background-color: white;
+nav ul{
+  background-color: black;
+  color: white;
   padding: 0.5rem 0;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
-li{
+nav li{
   color: white;
  list-style: none;
+}
+
+nav a, nav a:visited{
+  color:white;
+  text-decoration: none;
 }
 main{
   margin: 2rem 0
@@ -154,6 +160,122 @@ footer{
   font-size: 0.8rem;
   margin-bottom: 10px;
 }
+#inv-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  padding: 0;
+  list-style-type: none;
+  margin: 20px auto;
+}
+
+#inv-display li{
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#inv-display img {
+  width: 100%;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+.namePrice {
+    padding: 15px;
+    background-color: #f9f9f9;
+    flex-grow: 1;
+}
+.namePrice hr {
+    border: 0;
+    border-top: 1px solid #0ab4d6;
+    margin: 10px 0;
+}
+
+.namePrice h2 {
+    font-size: 1.25rem;
+    margin: 10px 0;
+}
+
+.namePrice h2 a {
+    text-decoration: none;
+    font-weight: 600;
+    color: #11173b;
+}
+
+.namePrice h2 a:hover {
+    text-decoration: underline;
+    color: #0ab4d6;
+}
+
+.namePrice span {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.notice {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    background: #eee;
+    padding: 20px;
+    border-radius: 5px;
+}
+#error-img{
+  margin: 0.5rem;
+  overflow: hidden;
+}
+#error-img img {
+  margin: 2rem auto;
+  max-width: 80%;
+  display: block;
+}
+.error-message-text h3{
+  text-align: center;
+}
+
+.car-detail-wrapper{
+  margin: 2rem auto;
+  display: flex;
+  gap: 40px;
+  max-width: 90%;
+}
+.car-image{
+  margin: 2rem auto;
+}
+.car-image img{
+  width: 350px;
+
+}
+.car-info{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.car-info :nth-child(even) {
+  background-color: #f3f2f2;
+
+}
+.car-info p{
+  padding: 1rem;
+  font-size: 1.2rem;
+}
+.error-page a{
+  text-decoration: underline dotted;
+  color: red; 
+  font-weight: 600;
+}
+.error-page a:visited{
+  text-decoration: underline dotted;
+  color: purple; 
+  font-weight: 600;
+}
 
 /****Mobile*****/
 
@@ -201,5 +323,11 @@ footer{
   #car-features{
     display: flex;
     flex-direction: column-reverse;
+  }
+  .car-detail-wrapper{
+    flex-direction: column;
+  }
+  #inv-display{
+    grid-template-columns: 1fr;
   }
 }
