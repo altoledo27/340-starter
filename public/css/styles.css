@@ -20,11 +20,11 @@ body {
   border: 5px solid #0ab4d6;
   border-radius: 1%;
 }
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6, label, .management-links a, legend{
   font-family: "Roboto Slab", serif;
   font-weight: 600;
 }
-p, a, li{
+p, a, li,span, button{
   font-family: "Zalando Sans", sans-serif;
   font-weight: 400;
 }
@@ -275,6 +275,223 @@ footer{
   color: purple; 
   font-weight: 600;
 }
+
+.login-container, #register, .add-form-container{
+  background-color:#0ab4d6;
+  display: flex;
+  width: 400px;
+  margin: 0 auto;
+  flex-direction: column;
+}
+.login-container fieldset{
+  margin: 0.5rem auto 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 2rem;
+  border: none;
+}
+.login-container label, .login-container span, #register label, .management-links li, .add-form-container span, .add-form-container legend{
+  margin-top: 1rem;
+}
+.login-container span, .add-form-container span{
+  font-style: italic;
+  font-size: 0.8rem;
+}
+.login-container p{
+  text-align: center;
+  margin: 1.5rem;
+}
+.login-container button{
+  margin: 1rem auto 0;
+  width: 100px;
+}
+.login-container a{
+  text-decoration: underline;
+  color: black;
+}
+.login-container a:hover{
+  color: white;
+  font-weight: 800;
+}
+#register{
+  padding: 1rem;
+}
+#register input, .add-form-container input{
+  width: 300px;
+  padding: 5px 0;
+}
+#pswBtn, .btn-register{
+  border: 2px solid #000;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 2px;
+  margin-top: 1em;
+  font-size: small;
+  width: 150px;
+  text-align: center;
+  cursor: pointer;
+}
+#pswBtn:hover{
+  background-color: #ddd;
+
+}
+.management-links li{
+  list-style: none;
+}
+
+.management-links a:hover{
+  color:#0ab4d6;
+  font-weight: 800;
+}
+
+
+input:focus:invalid {
+    background-color: #eb726ec5;
+    box-shadow: 0 0 5px rgba(217, 83, 79, 0.5);
+}
+input:required:valid {
+    background-color: #29eb56a9;
+}
+
+
+.add-form-container {
+  background-color: #0ab4d6;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+
+.add-form-container span {
+    display: block;
+    margin: 10px;
+}
+
+fieldset {
+    border: 2px solid #999999;
+    padding: 15px 20px;
+    margin: 0;
+    text-align: left;
+}
+
+legend {
+    color: #11173b;
+    font-weight: bold;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 1.1rem;
+}
+
+
+fieldset > span {
+    display: block;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+
+#classification-name {
+    width: 90%; 
+    padding: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+
+.btn {
+    background-color: #e0e0e0; 
+    color: black;
+    padding: 5px 15px;
+    border: 1px solid #a0a0a0; 
+    border-radius: 3px; 
+    font-size: 1rem;
+    cursor: pointer;
+
+}
+
+.btn:hover {
+    background-color: #d0d0d0;
+    border-color: #808080;
+}
+
+
+.add-form-container2 {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.add-form-container2 form {
+    width: 100%;
+    max-width: 500px;
+    text-align: left;
+    background-color: #0ab4d6; 
+}
+
+.add-form-container2 form > span {
+    display: block;
+    font-style: italic;
+    font-weight: 600;
+    margin: 10px;
+}
+
+.add-form-container2 fieldset {
+    border: 2px solid #0ab4d6; 
+    background-color: #0ab4d6;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-form-container2 label {
+    display: block;
+    font-weight: bold;
+    color: #11173b;
+    margin-top: 12px;
+    margin-bottom: 4px;
+}
+.add-form-container2 input, 
+.add-form-container2 select, 
+.add-form-container2 textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.add-form-container2 textarea {
+    height: 80px;
+    resize: vertical; 
+}
+
+.btn-register {
+    margin-top: 25px;
+    background-color: #e0e0e0; 
+    color: black;
+    padding: 8px 20px;
+    border: 1px solid #a0a0a0;
+    border-radius: 3px;
+    font-size: 1rem;
+    font-weight: normal;
+    cursor: pointer;
+    align-self: flex-start; 
+}
+
+.btn-register:hover {
+    background-color: #d0d0d0;
+    border-color: #808080;
+}
+
+
 
 /****Mobile*****/
 

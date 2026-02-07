@@ -1,0 +1,18 @@
+<h1><%= title %></h1>
+  <%- messages() %> 
+<div class="login-container">
+  <form id="loginForm" action="/account/login" method="post">
+    <fieldset>
+      <label for="account_email">Email Address:</label>
+      <input type="email" id="account_email" name="account_email" required placeholder="Enter a valid email address">
+
+      <label for="account_password">Password:</label>
+      <input type="password" id="account_password" name="account_password" required minlength="12">
+      <span class="password-hint">Passwords must be at least 12 characters.</span>
+
+      <button type="submit" class="btn-primary">Login</button>
+    </fieldset>
+  </form>
+
+  <p class="signup-link">No account? <a href="/account/register">Sign-up</a></p>
+</div>
