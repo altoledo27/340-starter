@@ -16,6 +16,7 @@ const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
 const utilities = require("./utilities/")
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 
 /* ***********************
  * View Engine and Templates
@@ -44,6 +45,8 @@ app.use(function(req,res,next){
 })
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true})) //for parsing aplications
+app.use(cookieParser())
+app.use(utilities.checkJWTToken)
 
 
 /* ***********************

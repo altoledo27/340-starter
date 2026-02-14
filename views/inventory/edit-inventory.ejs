@@ -1,0 +1,34 @@
+<h1><%= title %></h1>
+<%- messages() %>
+<div class="add-form-container2">
+    <form action = "/inv/update" method="post">
+        <fieldset>
+            <label>Classification</label>
+            <%- classificationSelect%>
+            <label for="inv_make">Make</label>
+            <input type="text" id="inv_make" name="inv_make" required value="<%= locals.inv_make %>" placeholder="Min of 3 characters">
+            <label for="inv_model">Model</label>
+            <input type="text" id="inv_model" name="inv_model" required value="<%= locals.inv_model %>" placeholder="Min of 3 characters">
+            <label for="inv_description">Description</label>
+            <textarea id="inv_description" name="inv_description" required><%= locals.inv_description %></textarea>
+            <label for="inv_image">Image Path</label>
+            <input type="text" id="inv_image" name="inv_image" required value="<%= locals.inv_image || '/images/vehicles/no-image.png' %>">
+            <label for="inv_thumbnail">Thumbnail Path</label>
+            <input type="text" id="inv_thumbnail" name="inv_thumbnail" required value="<%= locals.inv_thumbnail || '/images/vehicles/no-image.png'%>">
+            <label for="inv_price">Price</label>
+            <input type="text" id="inv_price" name="inv_price" required value="<%= locals.inv_price %>" placeholder="decimal or integer" pattern ="[0-9]+([\\.,][0-9]+)?">
+            <label for="inv_year">Year</label>
+            <input type="text" id="inv_year" name="inv_year" required value="<%= locals.inv_year %>" pattern="[0-9]+" maxlength="4">
+            <label for="inv_miles">Miles</label>
+            <input type="text" id="inv_miles" name="inv_miles" required value="<%= locals.inv_miles %>" pattern="[0-9]+">
+            <label for="inv_color">Color</label>
+            <input type="text" id="inv_color" name="inv_color" required value="<%= locals.inv_color %>">
+            
+            <button type="submit" class="btn-register">Update Vehicle</button>
+            <input type="hidden" name="inv_id" 
+            <% if(locals.inv_id) { %> value="<%= locals.inv_id %>" 
+            <% } %>>
+        </fieldset>
+    </form>
+
+</div>

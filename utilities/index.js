@@ -1,4 +1,6 @@
 const invModel = require("../models/inventory-model")
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 const Util = {}
 /**
  * Construct the nav HTML unordered list
@@ -47,7 +49,7 @@ Util.buildClassificationList = async function (classification_id= null) {
  * General Error Handling
  */
 Util.handleErrors = fn => (req, res, next) =>Promise.resolve(fn(req, res, next)).catch(next)
-module.exports = Util
+
 
 /**
  * Build the classification view HTML
@@ -99,3 +101,51 @@ Util.buildInventoryGrid = async function(data) {
     </section>
   `;
 };
+
+Util.checkJWTToken= (req, res, next) => {
+  if(req.cookies.jwt) {
+    jwt.verify(
+      req.cookies.jwt,
+      process.env.ACCESS_TOKEN_SECRET,
+      function (err, accountData){
+        if(err) {
+          req.flash("Please log in")
+          res.clearCokie("jwt")
+          return res.redirect("/account/login")
+        }
+        res.locals.accountData = accountData
+        res.locals.loggedin = 1
+        next()
+      })
+  } else {
+    next()
+  }
+}
+
+Util.checkLogin = (req, res, next) => {
+  if(res.locals.loggedin){
+    next()
+  }else{
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+}
+
+/* ****************************************
+ * Check Account Type (Employee or Admin)
+ * **************************************** */
+Util.checkAccountType = (req, res, next) => {
+  if (res.locals.loggedin) {
+    const accountType = res.locals.accountData.account_type
+
+    if (accountType === "Employee" || accountType === "Admin") {
+      return next() // Acceso concedido
+    }
+    req.flash("notice", "Access denied. You do not have the required permissions.")
+    return res.redirect("/account/login")
+  }
+  req.flash("notice", "Please log in to access this area.")
+  return res.redirect("/account/login")
+}
+
+module.exports = Util

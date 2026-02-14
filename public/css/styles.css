@@ -20,11 +20,11 @@ body {
   border: 5px solid #0ab4d6;
   border-radius: 1%;
 }
-h1, h2, h3, h4, h5, h6, label, .management-links a, legend{
+h1, h2, h3, h4, h5, h6, label, .management-links a, legend, #inventoryDisplay th{
   font-family: "Roboto Slab", serif;
   font-weight: 600;
 }
-p, a, li,span, button{
+p, a, li,span, button, #inventoryDisplay{
   font-family: "Zalando Sans", sans-serif;
   font-weight: 400;
 }
@@ -283,6 +283,9 @@ footer{
   margin: 0 auto;
   flex-direction: column;
 }
+#register{
+  width: 470px;
+}
 .login-container fieldset{
   margin: 0.5rem auto 0;
   display: flex;
@@ -337,11 +340,16 @@ footer{
 }
 .management-links li{
   list-style: none;
+  margin-left: 1.5rem;
 }
 
 .management-links a:hover{
   color:#0ab4d6;
   font-weight: 800;
+}
+
+.management-container h2, .management-container p, .management-container select, .management-container h3{
+  margin-top: 1rem;
 }
 
 
@@ -465,7 +473,6 @@ fieldset > span {
     border: 1px solid #ccc;
     font-size: 1rem;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
 }
 
 .add-form-container2 textarea {
@@ -489,6 +496,156 @@ fieldset > span {
 .btn-register:hover {
     background-color: #d0d0d0;
     border-color: #808080;
+}
+
+#inventoryDisplay {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+}
+
+#inventoryDisplay thead {
+    background-color: #111; 
+    color: white;
+}
+
+#inventoryDisplay th {
+    padding: 12px 15px;
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+#inventoryDisplay td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+}
+
+#inventoryDisplay tbody tr:hover {
+    background-color: #f1f7ff;
+    transition: background-color 0.2s ease;
+}
+
+#inventoryDisplay a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+
+#inventoryDisplay a[title="Click to update"] {
+    color: #0ab4d6;
+    border: 1px solid #0ab4d6;
+}
+
+#inventoryDisplay a[title="Click to update"]:hover {
+    background-color: #0ab4d6;
+    color: white;
+}
+
+#inventoryDisplay a[title="Click to delete"] {
+    color: #d9534f;
+    border: 1px solid #d9534f;
+}
+
+#inventoryDisplay a[title="Click to delete"]:hover {
+    background-color: #d9534f;
+    color: white;
+}
+.update-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.update-container h2 {
+    color: #11173b; 
+    border-bottom: 2px solid #0ab4d6; 
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+.form-section {
+    margin-bottom: 40px;
+}
+
+.account-form fieldset {
+    border: none;
+    padding: 0;
+}
+
+.account-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.account-form input[type="text"],
+.account-form input[type="email"],
+.account-form input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.account-form input:focus {
+    outline: none;
+    border-color: #0ab4d6;
+    box-shadow: 0 0 5px rgba(10, 180, 214, 0.3);
+}
+
+.form-note {
+    font-size: 0.85rem;
+    color: #666;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-left: 4px solid #11173b;
+    margin-bottom: 20px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #11173b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #0ab4d6;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #eee;
+    margin: 40px 0;
+}
+
+.notice {
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    list-style: none;
 }
 
 
@@ -545,5 +702,13 @@ fieldset > span {
   }
   #inv-display{
     grid-template-columns: 1fr;
+  }
+  #inventoryDisplay th, #inventoryDisplay td {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+  .update-container {
+    padding: 15px;
+    margin: 10px;
   }
 }
