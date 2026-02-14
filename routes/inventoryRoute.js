@@ -4,11 +4,12 @@ const router = new express.Router()
 const invController = require("../controllers/invController")
 const Util = require("../utilities/")
 const invValidate = require("../utilities/inventory-validation")
+
 //Router to build inventory classification view
 router.get("/", Util.checkJWTToken, Util.checkAccountType, Util.handleErrors(invController.buildManagement));
 router.get("/add-classification", Util.checkJWTToken, Util.checkAccountType, Util.handleErrors(invController.buildAddClassification))
 router.get("/type/:classificationId", Util.handleErrors(invController.buildByClassificationId));
-router.get("/detail/:invId", Util.handleErrors(invController.buildByInventoryId));
+router.get("/detail/:invId", Util.checkJWTToken, Util.handleErrors(invController.buildByInventoryId));
 router.get("/add-classification", Util.handleErrors(invController.buildAddClassification));
 router.post("/add-classification", Util.handleErrors(invController.addClassification));
 router.get("/add-inventory", Util.handleErrors(invController.buildAddInventory));

@@ -2,9 +2,9 @@ const invModel = require("../models/inventory-model")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
 const Util = {}
-/**
+/* *************************************
  * Construct the nav HTML unordered list
- */
+ * *************************************/
 Util.getNav = async function (req, res,next) {
     let data = await invModel.getClassifications()
     //console.log(data)
@@ -43,17 +43,17 @@ Util.buildClassificationList = async function (classification_id= null) {
   classificationList += "</select>"
   return classificationList
 }
-/**
+/* *******************************
  * Middleware For Handling Errors
  * Wrap other function in this for
  * General Error Handling
- */
+ * *******************************/
 Util.handleErrors = fn => (req, res, next) =>Promise.resolve(fn(req, res, next)).catch(next)
 
 
-/**
+/* ***********************************
  * Build the classification view HTML
- */
+ * ***********************************/
 Util.buildClassificationGrid = async function(data){
     let grid
     if(data.length > 0){
@@ -84,21 +84,50 @@ Util.buildClassificationGrid = async function(data){
     }
 
 
-Util.buildInventoryGrid = async function(data) {
-  const vehicle = data[0];
+Util.buildInventoryGrid = async function(vehicle, isLoggedIn, isFavorite) {
+  //Add a heart button for the wishlist
+  let wishlistButton = ''
+  if (isLoggedIn) {
+    if (isFavorite){
+      wishlistButton = `
+        <div class="already-favorite">
+          <span class="heart-icon">❤</span> Already in your wishlist
+          <p><a href="/account/" class="go-wishlist">View Wishlist</a></p>
+        </div>
+      `;
+    }else{
+       wishlistButton = `
+      <form action="/account/wishlist/add" method="post" class="wishlist-form">
+        <input type="hidden" name="inv_id" value="${vehicle.inv_id}">
+        <button type="submit" class="btn-favorite">❤ Add to Favorites</button>
+      </form>
+    `;
+    }
+   
+  } else {
+    wishlistButton = `
+      <p class="login-notice"><a href="/account/login">Log in</a> to add to favorites.</p>
+    `;
+  }
   return `
     <section class="car-detail-wrapper">
       <div class="car-image">
-        <img src="${vehicle.inv_thumbnail}" alt="${vehicle.inv_make} ${vehicle.inv_model} image">
+        <img src="${vehicle.inv_image}" alt="${vehicle.inv_make} ${vehicle.inv_model} image">
       </div>
-      <div class="car-info">
-        <h2>${vehicle.inv_make} ${vehicle.inv_model} Details</h2>
-        <p class="price"><strong>Price: $${new Intl.NumberFormat('en-US').format(vehicle.inv_price)}</strong></p>
-        <p class="description"><strong>Description:</strong> ${vehicle.inv_description}</p>
-        <p class="specs"><strong>Color:</strong> ${vehicle.inv_color}</p>
-        <p class="specs"><strong>Miles:</strong> ${new Intl.NumberFormat('en-US').format(vehicle.inv_miles)}</p>
-      </div>
+      <div class= "car-info-container">
+        <div class="car-info">
+          <h2>${vehicle.inv_make} ${vehicle.inv_model} Details</h2>
+          <p class="price"><strong>Price: $${new Intl.NumberFormat('en-US').format(vehicle.inv_price)}</strong></p>
+          <p class="description"><strong>Description:</strong> ${vehicle.inv_description}</p>
+          <p class="specs"><strong>Color:</strong> ${vehicle.inv_color}</p>
+          <p class="specs"><strong>Miles:</strong> ${new Intl.NumberFormat('en-US').format(vehicle.inv_miles)}</p>
+        </div>
+        <div class="wishlist-container">
+            ${wishlistButton}  
+        </div>
+      </div>  
     </section>
+    
   `;
 };
 
@@ -139,7 +168,7 @@ Util.checkAccountType = (req, res, next) => {
     const accountType = res.locals.accountData.account_type
 
     if (accountType === "Employee" || accountType === "Admin") {
-      return next() // Acceso concedido
+      return next()
     }
     req.flash("notice", "Access denied. You do not have the required permissions.")
     return res.redirect("/account/login")

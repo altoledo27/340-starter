@@ -1,7 +1,5 @@
 <h1><%= title %></h1>
 <%- messages() %>
-
-
 <section id="account-update" class="management-container">
     <% if (locals.accountData) { %>
     <h2>Welcome, <%= locals.accountData.account_firstname %></h2>
@@ -23,3 +21,27 @@
         </p>
     </section>
 <% } %>
+
+<%- messages() %> 
+<hr>
+<section id="wishlist-section">
+  <h3>My Wishlist</h3>
+  <% if (wishlist && wishlist.length > 0) { %>
+    <div class="wishlist-gallery">
+      <% wishlist.forEach(item => { %>
+        <div class="wishlist-card">
+          <a href="/account/wishlist/remove/<%= item.wishlist_id %>" class="remove-favorite" title="Remove from wishlist">×</a>
+          
+          <img src="<%= item.inv_thumbnail %>" alt="<%= item.inv_make %>">
+          
+          <div class="wishlist-info">
+            <p><%= item.inv_make %> <%= item.inv_model %></p>
+            <a href="/inv/detail/<%= item.inv_id %>" class="view-btn">View</a>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <p>Your wishlist is empty.</p>
+  <% } %>
+</section>

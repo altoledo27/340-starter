@@ -1,12 +1,13 @@
 const utilities = require("../utilities")
 const accountModel = require("../models/account-model")
+const wishModel = require("../models/wishlist-model")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
 
-/**
+/* *********************
  * Deliver login view
- */
+ * *********************/
 
 async function buildLogin(req, res, next){
     let nav = await utilities.getNav()
@@ -16,10 +17,9 @@ async function buildLogin(req, res, next){
     })
 }
 
-/**
- * 
+/* **************************
  * Deliver registration view
- */
+ * *************************/
 
 async function buildRegister (req, res, next) {
     let nav = await utilities.getNav()
@@ -31,9 +31,9 @@ async function buildRegister (req, res, next) {
     
 }
 
-/**
+/* **********************
  * Process Registration
- */
+ * **********************/
 
 async function registerAccount(req, res) {
     let nav = await utilities.getNav()
@@ -119,12 +119,16 @@ async function accountLogin(req, res) {
   }
 }
 
-async function buildManagement(req, res) {
+async function buildManagement(req, res, next) {
   let nav = await utilities.getNav()
+
+  const account_id = res.locals.accountData.account_id
+  const wishlistData = await wishModel.getWishlistByAccountId(account_id)
   res.render("account/management", {
     title: "Account Management",
     nav,
     errors: null,
+    wishlist: wishlistData,
   })
   
 }

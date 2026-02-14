@@ -1,11 +1,12 @@
 const invModel = require("../models/inventory-model")
+const wishModel = require("../models/wishlist-model")
 const utilities = require("../utilities/")
 
 const invCont = {}
 
-/**
+/* ****************************************
  * Build inventory by classification view
- */
+ * ***************************************/
 invCont.buildByClassificationId = async function (req, res, next){
     const classification_id = req.params.classificationId
     const data = await invModel.getInventoryByClassificationId(classification_id)
@@ -23,16 +24,23 @@ invCont.buildByInventoryId = async function (req, res, next){
     const inv_id = req.params.invId
     const data = await invModel.getInventoryByInventoryId(inv_id)
 
-    if (!data || data.length === 0) {
-    const err = new Error("Sorry, we couldn't find that specific vehicle.");
-    err.status = 404;
-    return next(err); 
-  }
-    const grid = await utilities.buildInventoryGrid(data)
+    if (!data) {
+      const err = new Error("Sorry, we couldn't find that specific vehicle.");
+      err.status = 404;
+      return next(err); 
+    }
+    let isFavorite = false
+    if(res.locals.loggedin){
+      const account_id = res.locals.accountData.account_id
+      isFavorite = await wishModel.checkWishlist(account_id, inv_id)
+
+    }
+
+    const grid = await utilities.buildInventoryGrid(data, res.locals.loggedin , isFavorite)
     let nav = await utilities.getNav()
-    const carMake = data[0].inv_make 
-    const carModel = data[0].inv_model
-    const carYear = data[0].inv_year
+    const carMake = data.inv_make 
+    const carModel = data.inv_model
+    const carYear = data.inv_year
     res.render("./inventory/car-detail", {
         title: carYear + ' ' + carMake + ' ' + carModel,
         nav,
@@ -40,9 +48,9 @@ invCont.buildByInventoryId = async function (req, res, next){
     })
 }
 
-/**
+/* ***********************
  * Build management view
- */
+ * **********************/
 
 invCont.buildManagement = async function (req, res, next) {
     let nav = await utilities.getNav()
@@ -54,9 +62,9 @@ invCont.buildManagement = async function (req, res, next) {
         classificationSelect,
     })
 }
-/**
+/* *******************************
  * Build add classification view
- */
+ * ******************************/
 invCont.buildAddClassification = async function (req, res, next) {
     let nav = await utilities.getNav()
     res.render("inventory/add-classification", {

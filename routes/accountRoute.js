@@ -3,6 +3,7 @@ const router = new express.Router()
 const Util = require("../utilities/")
 const accountController = require("../controllers/accountController")
 const regValidate = require('../utilities/account-validation')
+const wishCont = require("../controllers/wishController")
 
 router.get("/", Util.checkLogin, Util.handleErrors(accountController.buildManagement))
 router.get("/login", Util.handleErrors(accountController.buildLogin))
@@ -14,6 +15,8 @@ router.get("/update/:accountId", Util.checkLogin, Util.handleErrors(accountContr
 router.post("/update-info", regValidate.updateAccountRules(), regValidate.checkUpdateData, Util.handleErrors(accountController.updateAccount))
 router.post("/update-password", regValidate.passwordRules(), regValidate.checkUpdateData, Util.handleErrors(accountController.updatePassword))
 router.get("/logout", Util.handleErrors(accountController.accountLogout))
+router.post("/wishlist/add", Util.checkLogin, Util.handleErrors(wishCont.addFavorite))
+router.get("/wishlist/remove/:wishlistId", Util.checkLogin, Util.handleErrors(wishCont.removeFavorite))
 
 
 module.exports = router;
